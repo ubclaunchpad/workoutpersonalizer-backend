@@ -1,4 +1,5 @@
 import express from "express";
+import "./creators-corner";
 
 const app = express();
 const port = 3000;
