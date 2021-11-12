@@ -11,6 +11,3 @@ RUN npm run build
 
 # start app
 CMD ["npm", "run", "dev"]
-
-## docker build -t wp-backend:1.0.0 .
-## docker run -it --rm -p -t 3000:3000 wp-backend:1.0.0
