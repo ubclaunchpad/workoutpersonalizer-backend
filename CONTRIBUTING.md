@@ -1,4 +1,4 @@
- 📚 Contributing
+📚 Contributing
 
 # 🛠 Issues
 
@@ -25,7 +25,6 @@ Bugs can be reported by anyone at anytime. Check `bugs` label for duplicate repo
 - any other **notes** (e.g. if the bug only occurs in certain situations)
 
 If you find an existing bug report that is missing information (such as if a bug can be reproduced in other ways), feel free to add details.
-
 
 # 🔀 Pull requests
 

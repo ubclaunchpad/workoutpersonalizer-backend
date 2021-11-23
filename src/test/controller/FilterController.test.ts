@@ -1,5 +1,7 @@
 import { Express } from 'express';
 
+/* eslint-disable  no-unused-vars */
+
 describe('Unit tests for FilterController', function () {
   let app: Express;
 

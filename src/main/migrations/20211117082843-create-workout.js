@@ -1,5 +1,5 @@
 'use strict';
-const { UUIDV4 } = require("sequelize");
+const { UUIDV4 } = require('sequelize');
 
 module.exports = {
   up: (queryInterface, Sequelize) => {
@@ -8,7 +8,7 @@ module.exports = {
         allowNull: false,
         defaultValue: UUIDV4,
         primaryKey: true,
-        type: Sequelize.UUID
+        type: Sequelize.UUID,
       },
       userId: {
         type: Sequelize.UUID,
@@ -32,7 +32,7 @@ module.exports = {
         type: Sequelize.DECIMAL,
         allowNull: false,
       },
-      creationDate:  {
+      creationDate: {
         type: Sequelize.DATE,
         allowNull: false,
       },
@@ -51,10 +51,10 @@ module.exports = {
       updatedAt: {
         type: Sequelize.DATE,
         allowNull: false,
-      }
+      },
     });
   },
   down: (queryInterface, Sequelize) => {
     return queryInterface.dropTable('Workouts');
-  }
+  },
 };

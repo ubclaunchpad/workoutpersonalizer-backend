@@ -1,5 +1,5 @@
 'use strict';
-const { UUIDV4 } = require("sequelize");
+const { UUIDV4 } = require('sequelize');
 
 module.exports = {
   up: (queryInterface, Sequelize) => {
@@ -35,10 +35,10 @@ module.exports = {
       updatedAt: {
         type: Sequelize.DATE,
         allowNull: false,
-      }
+      },
     });
   },
   down: (queryInterface, Sequelize) => {
     return queryInterface.dropTable('Users');
-  }
+  },
 };
