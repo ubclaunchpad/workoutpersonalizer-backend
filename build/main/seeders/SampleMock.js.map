@@ -1,1 +1,0 @@
-{"version":3,"file":"SampleMock.js","sourceRoot":"","sources":["../../../src/main/seeders/SampleMock.ts"],"names":[],"mappings":";;;AAAA,+BAAoC;AAEvB,QAAA,UAAU,GAAG;IACxB;QACI,EAAE,EAAE,IAAA,SAAM,GAAE;QACZ,IAAI,EAAE,aAAa;QACnB,KAAK,EAAE,sBAAsB;KAChC;IACD;QACE,EAAE,EAAE,IAAA,SAAM,GAAE;QACZ,IAAI,EAAE,eAAe;QACrB,KAAK,EAAE,uBAAuB;KAC/B;CACF,CAAC"}
