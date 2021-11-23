@@ -2,7 +2,7 @@
 import { Model } from 'sequelize';
 
 export interface MuscleGroupAttributes {
-  id: string;
+  id: number;
   name: string;
 }
 
@@ -11,13 +11,13 @@ module.exports = (sequelize: any, DataTypes: any) => {
     extends Model<MuscleGroupAttributes>
     implements MuscleGroupAttributes
   {
-    id!: string;
+    id!: number;
     name!: string;
 
     static associate(models: any) {
       MuscleGroup.belongsToMany(models.Exercise, {
         through: 'MuscleGroupExercise',
-        onDelete: 'SET NULL',
+        onDelete: 'CASCADE',
       });
     }
   }

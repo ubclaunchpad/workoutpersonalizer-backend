@@ -2,7 +2,7 @@
 import { Model } from 'sequelize';
 
 export interface EquipmentAttributes {
-  id: string;
+  id: number;
   name: string;
 }
 
@@ -11,13 +11,13 @@ module.exports = (sequelize: any, DataTypes: any) => {
     extends Model<EquipmentAttributes>
     implements EquipmentAttributes
   {
-    id!: string;
+    id!: number;
     name!: string;
 
     static associate(models: any) {
       Equipment.belongsToMany(models.Exercise, {
         through: 'EquipmentExercise',
-        onDelete: 'SET NULL',
+        onDelete: 'CASCADE',
       });
     }
   }

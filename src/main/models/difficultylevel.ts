@@ -2,7 +2,7 @@
 import { Model } from 'sequelize';
 
 export interface DifficultyLevelAttributes {
-  id: string;
+  id: number;
   name: string;
 }
 
@@ -11,13 +11,13 @@ module.exports = (sequelize: any, DataTypes: any) => {
     extends Model<DifficultyLevelAttributes>
     implements DifficultyLevelAttributes
   {
-    id!: string;
+    id!: number;
     name!: string;
 
     static associate(models: any) {
       DifficultyLevel.belongsToMany(models.Exercise, {
         through: 'DifficultyLevelExercise',
-        onDelete: 'SET NULL',
+        onDelete: 'CASCADE',
       });
     }
   }

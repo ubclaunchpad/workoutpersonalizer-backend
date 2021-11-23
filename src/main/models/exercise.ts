@@ -2,7 +2,7 @@
 import { Model } from 'sequelize';
 
 export interface ExerciseAttributes {
-  id: string;
+  id: number;
   name: string;
   description: string;
   thumbnailSrc: string;
@@ -15,7 +15,7 @@ module.exports = (sequelize: any, DataTypes: any) => {
     extends Model<ExerciseAttributes>
     implements ExerciseAttributes
   {
-    id!: string;
+    id!: number;
     name!: string;
     description!: string;
     thumbnailSrc!: string;
@@ -25,27 +25,27 @@ module.exports = (sequelize: any, DataTypes: any) => {
     static associate(models: any) {
       Exercise.belongsToMany(models.MuscleGroup, {
         through: 'MuscleGroupExercise',
-        onDelete: 'SET NULL',
+        onDelete: 'CASCADE',
       });
       Exercise.belongsToMany(models.ExerciseType, {
         through: 'ExerciseTypeExercise',
-        onDelete: 'SET NULL',
+        onDelete: 'CASCADE',
       });
       Exercise.belongsToMany(models.DifficultyLevel, {
         through: 'DifficultyLevelExercise',
-        onDelete: 'SET NULL',
+        onDelete: 'CASCADE',
       });
       Exercise.belongsToMany(models.Equipment, {
         through: 'EquipmentExercise',
-        onDelete: 'SET NULL',
+        onDelete: 'CASCADE',
       });
       Exercise.belongsToMany(models.Workout, {
         through: 'WorkoutExercise',
-        onDelete: 'SET NULL',
+        onDelete: 'CASCADE',
       });
       Exercise.belongsToMany(models.User, {
         through: 'SavedExercises',
-        onDelete: 'SET NULL',
+        onDelete: 'CASCADE',
       });
     }
   }

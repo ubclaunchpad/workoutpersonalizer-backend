@@ -32,7 +32,7 @@ module.exports = (sequelize: any, DataTypes: any) => {
 
       Workout.belongsToMany(models.Exercise, {
         through: 'WorkoutExercise',
-        onDelete: 'SET NULL',
+        onDelete: 'CASCADE',
       });
     }
   }
