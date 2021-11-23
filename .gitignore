@@ -2,5 +2,6 @@
 dist
 coverage
 node_modules
-prisma/migrations
-prisma/dev.db*
+.env
+build
+yarn-error.log
