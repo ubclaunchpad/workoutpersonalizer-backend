@@ -1,9 +1,13 @@
 import express, { Express } from 'express';
 import bodyParser from 'body-parser';
 import db from './models';
+import { Route } from './constant/Route';
+
 import { FilterController } from './controller/FilterController';
 import { FilterRouter } from './route/FilterRouter';
-import { Route } from './constant/Route';
+
+import { ExerciseController } from './controller/ExerciseController';
+import { ExerciseRouter } from './route/ExerciseRouter';
 
 /* eslint-disable  no-console */
 
@@ -35,5 +39,9 @@ export class App {
     const filterController = new FilterController();
     const filterRouter = new FilterRouter(filterController);
     app.use(Route.FILTERS, filterRouter.getRoutes());
+
+    const exerciseController = new ExerciseController();
+    const exerciseRouter = new ExerciseRouter(exerciseController);
+    app.use(Route.EXERCISES, exerciseRouter.getRoutes());
   }
 }
