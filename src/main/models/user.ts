@@ -20,6 +20,7 @@ module.exports = (sequelize: any, DataTypes: any) => {
     static associate(models: any) {
       User.hasMany(models.Workout, {
         as: 'workouts',
+        foreignKey: 'userId',
         onDelete: 'CASCADE',
       });
       User.belongsToMany(models.Exercise, {

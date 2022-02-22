@@ -81,6 +81,9 @@ module.exports = (sequelize: any, DataTypes: any) => {
     },
     {
       sequelize,
+      timestamps: true,
+      createdAt: 'creationDate',
+      updatedAt: 'lastModificationDate',
       modelName: 'Workout',
     }
   );

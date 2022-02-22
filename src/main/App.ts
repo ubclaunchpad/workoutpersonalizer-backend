@@ -8,6 +8,8 @@ import { FilterRouter } from './route/FilterRouter';
 
 import { ExerciseController } from './controller/ExerciseController';
 import { ExerciseRouter } from './route/ExerciseRouter';
+import { WorkoutController } from './controller/WorkoutController';
+import { WorkoutRouter } from './route/WorkoutRouter';
 
 /* eslint-disable  no-console */
 
@@ -36,9 +38,14 @@ export class App {
     app.get('/', (req, res) => res.send('Hello World'));
 
     // TODO: create remaining controllers and routes
+    console.log('registerHandlersAndRoutes');
     const filterController = new FilterController();
     const filterRouter = new FilterRouter(filterController);
     app.use(Route.FILTERS, filterRouter.getRoutes());
+
+    const workoutController = new WorkoutController();
+    const workoutRouter = new WorkoutRouter(workoutController);
+    app.use(Route.WORKOUTS, workoutRouter.getRoutes());
 
     const exerciseController = new ExerciseController();
     const exerciseRouter = new ExerciseRouter(exerciseController);

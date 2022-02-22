@@ -1,5 +1,4 @@
 import express, { Router } from 'express';
-import { Route } from '../constant/Route';
 import { WorkoutController } from '../controller/WorkoutController';
 
 export class WorkoutRouter {
@@ -10,17 +9,19 @@ export class WorkoutRouter {
     this.workoutController = workoutController;
   }
 
-  getRoutes = () => {
+  getRoutes = (): Router => {
+    this.workoutRouter.get('/', this.workoutController.getAllWorkouts);
+
     this.workoutRouter.get(
-      Route.WORKOUTS,
-      this.workoutController.getAllWorkouts
+      '/minimal',
+      this.workoutController.getAllWorkoutsMinimal
     );
-    this.workoutRouter.post(Route.WORKOUTS, this.workoutController.addWorkout);
-    this.workoutRouter.put(Route.WORKOUTS, this.workoutController.editWorkout);
-    this.workoutRouter.delete(
-      Route.WORKOUTS,
-      this.workoutController.deleteWorkout
-    );
+
+    this.workoutRouter.post('/', this.workoutController.addWorkout);
+
+    this.workoutRouter.put('/', this.workoutController.editWorkout);
+
+    this.workoutRouter.delete('/', this.workoutController.deleteWorkout);
 
     return this.workoutRouter;
   };

@@ -9,7 +9,7 @@
   "main": "src/main/Index.ts",
   "license": "MIT",
   "scripts": {
-    "dev": "nodemon src/index.ts",
+    "dev": "nodemon src/main/Index.ts",
     "build": "tsc --project ./",
     "prestart": "yarn run build",
     "start": "nodemon src/main/Index.ts",
