@@ -9,15 +9,10 @@ export class ExerciseRouter {
     this.exerciseController = exerciseController;
   }
 
-  getRoutes = (): Router => {
+  getRoutes(): Router {
     this.exerciseRouter.get('/', this.exerciseController.getAllExercises);
-
     this.exerciseRouter.post('/', this.exerciseController.addExercise);
 
-    this.exerciseRouter.put('/', this.exerciseController.editExercise);
-
-    this.exerciseRouter.delete('/', this.exerciseController.deleteExercise);
-
     return this.exerciseRouter;
-  };
+  }
 }

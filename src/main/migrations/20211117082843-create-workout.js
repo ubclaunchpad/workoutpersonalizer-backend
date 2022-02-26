@@ -6,22 +6,24 @@ const workouts = [
     id: 'a9af2b50-fc51-4d42-82d2-a65ad02c44ae',
     userId: 'b70820ae-d0a3-411b-9217-0bf2370e7139',
     name: '8 Minutes to Intense Abs',
-    imageUrl: 'https://teamworkoutplatform.s3.us-west-2.amazonaws.com/Exercise+1+Thumbnail.png',
+    imageUrl:
+      'https://teamworkoutplatform.s3.us-west-2.amazonaws.com/Exercise+1+Thumbnail.png',
     totalWorkoutTime: 510,
     creationDate: new Date(),
     lastModificationDate: new Date(),
-    deletionDate: new Date()
+    deletionDate: new Date(),
   },
   {
     id: '5015cb45-bde5-40f4-b0b8-027d960f2e92',
     userId: 'b70820ae-d0a3-411b-9217-0bf2370e7139',
     name: '4 Minute Stretch',
-    imageUrl: 'https://teamworkoutplatform.s3.us-west-2.amazonaws.com/Clip+1+Thumbnail.png',
+    imageUrl:
+      'https://teamworkoutplatform.s3.us-west-2.amazonaws.com/Clip+1+Thumbnail.png',
     totalWorkoutTime: 240,
     creationDate: new Date(),
     lastModificationDate: new Date(),
-    deletionDate: new Date()
-  }
+    deletionDate: new Date(),
+  },
 ];
 
 module.exports = {

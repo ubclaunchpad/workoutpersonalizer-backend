@@ -10,6 +10,8 @@ import { ExerciseController } from './controller/ExerciseController';
 import { ExerciseRouter } from './route/ExerciseRouter';
 import { WorkoutController } from './controller/WorkoutController';
 import { WorkoutRouter } from './route/WorkoutRouter';
+import { UserController } from './controller/UserController';
+import { UserRouter } from './route/UserRouter';
 
 /* eslint-disable  no-console */
 
@@ -35,13 +37,16 @@ export class App {
 
   async registerHandlersAndRoutes(app: Express): Promise<void> {
     app.use(bodyParser.json());
-    app.get('/', (req, res) => res.send('Hello World'));
+    app.get('/', (_req, res) => res.send('Hello World'));
 
     // TODO: create remaining controllers and routes
-    console.log('registerHandlersAndRoutes');
     const filterController = new FilterController();
     const filterRouter = new FilterRouter(filterController);
     app.use(Route.FILTERS, filterRouter.getRoutes());
+
+    const userController = new UserController();
+    const userRouter = new UserRouter(userController);
+    app.use(Route.USERS, userRouter.getRoutes());
 
     const workoutController = new WorkoutController();
     const workoutRouter = new WorkoutRouter(workoutController);

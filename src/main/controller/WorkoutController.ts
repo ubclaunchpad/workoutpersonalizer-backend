@@ -1,8 +1,8 @@
 import { Request, Response } from 'express';
 import db from '../models';
+import { Route } from '../constant/Route';
 
 export class WorkoutController {
-  // TODO: implement all get/add/edit/delete with db & Sequelize
   getAllWorkouts = async (_req: Request, res: Response): Promise<any> => {
     try {
       const workouts = await db.Workout.findAll();
@@ -31,20 +31,52 @@ export class WorkoutController {
     }
   };
 
-  addWorkout = (req: Request, res: Response) => {
+  getWorkoutMinimal = async (req: Request, res: Response) => {
     try {
-      const newWorkout = db.Workout.create(req.body);
+      if (!req.params.workoutId) {
+        throw `Missing workoutId param. Endpoint usage: /${Route.WORKOUTS}/minimal/:workoutId`;
+      }
+
+      const workout = await db.Workout.findOne({
+        attributes: [
+          'name',
+          'totalWorkoutTime',
+          'creationDate',
+          'lastModificationDate',
+        ],
+        where: { id: req.params.workoutId },
+      });
+
+      return res.status(200).send(workout);
+    } catch (e) {
+      return res.status(400).send({ e });
+    }
+  };
+
+  addWorkout = async (req: Request, res: Response) => {
+    try {
+      const newWorkout = await db.Workout.create(req.body);
       return res.status(200).send(newWorkout);
     } catch (e) {
       return res.status(400).send({ e });
     }
   };
 
-  editWorkout = (req: Request, res: Response) => {
-    res.status(501).send('TODO');
-  };
+  deleteWorkout = async (req: Request, res: Response) => {
+    try {
+      if (!req.params.workoutId) {
+        throw `Missing workoutId param. Usage: /${Route.WORKOUTS}/:workoutId`;
+      }
 
-  deleteWorkout = (req: Request, res: Response) => {
-    res.status(501).send('TODO');
+      await db.Workout.destroy({
+        where: {
+          id: req.params.workoutId,
+        },
+      });
+
+      return res.status(200).end();
+    } catch (e) {
+      return res.status(400).send({ e });
+    }
   };
 }

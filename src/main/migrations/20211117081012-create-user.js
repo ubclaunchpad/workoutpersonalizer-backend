@@ -9,8 +9,8 @@ const users = [
     username: 'lp_team',
     email: 'lp_team@mail.com',
     createdAt: new Date(),
-    updatedAt: new Date()
-  }
+    updatedAt: new Date(),
+  },
 ];
 
 module.exports = {

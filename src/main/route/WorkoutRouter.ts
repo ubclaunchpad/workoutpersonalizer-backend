@@ -9,20 +9,22 @@ export class WorkoutRouter {
     this.workoutController = workoutController;
   }
 
-  getRoutes = (): Router => {
+  getRoutes(): Router {
     this.workoutRouter.get('/', this.workoutController.getAllWorkouts);
-
     this.workoutRouter.get(
       '/minimal',
       this.workoutController.getAllWorkoutsMinimal
     );
-
+    this.workoutRouter.get(
+      '/minimal/:workoutId',
+      this.workoutController.getWorkoutMinimal
+    );
     this.workoutRouter.post('/', this.workoutController.addWorkout);
-
-    this.workoutRouter.put('/', this.workoutController.editWorkout);
-
-    this.workoutRouter.delete('/', this.workoutController.deleteWorkout);
+    this.workoutRouter.delete(
+      '/:workoutId',
+      this.workoutController.deleteWorkout
+    );
 
     return this.workoutRouter;
-  };
+  }
 }
