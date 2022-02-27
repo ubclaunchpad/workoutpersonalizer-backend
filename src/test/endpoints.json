@@ -1,0 +1,89 @@
+{
+	"info": {
+		"_postman_id": "72228e62-4658-475b-8531-7f72f90144a1",
+		"name": "lp-fithub",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+	},
+	"item": [
+		{
+			"name": "/filters/muscleGroups",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "http://localhost:8000/filters/muscleGroups",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8000",
+					"path": [
+						"filters",
+						"muscleGroups"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "/workouts",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "http://localhost:8000/workouts",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8000",
+					"path": [
+						"workouts"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "/workouts/minimal",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "http://localhost:8000/workouts/minimal",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8000",
+					"path": [
+						"workouts",
+						"minimal"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "http://localhost:8000/users/:userId/savedExercises",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "http://localhost:8000/users/b70820ae-d0a3-411b-9217-0bf2370e7139/savedExercises",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8000",
+					"path": [
+						"users",
+						"b70820ae-d0a3-411b-9217-0bf2370e7139",
+						"savedExercises"
+					]
+				}
+			},
+			"response": []
+		}
+	]
+}
