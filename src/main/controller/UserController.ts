@@ -29,12 +29,15 @@ export class UserController {
       const savedExercises = await db.User.findOne({
         attributes: [],
         where: { id: req.params.userId },
-        include: db.Exercise,
+        include: {
+          model: db.Exercise,
+          as: 'savedExercises',
+        },
       });
 
       return res.status(200).send(savedExercises);
     } catch (e) {
-      return res.status(400).send({ e });
+      return res.status(400).send(e);
     }
   };
 }

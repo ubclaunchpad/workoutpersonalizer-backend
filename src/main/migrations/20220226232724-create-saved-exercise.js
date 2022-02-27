@@ -26,8 +26,8 @@ module.exports = {
           references: {
             model: 'Users',
             key: 'id',
-            as: 'userId'
-          }
+            as: 'userId',
+          },
         },
         exerciseId: {
           type: Sequelize.INTEGER.UNSIGNED,
@@ -35,8 +35,8 @@ module.exports = {
           references: {
             model: 'Exercises',
             key: 'id',
-            as: 'exerciseId'
-          }
+            as: 'exerciseId',
+          },
         },
         createdAt: {
           allowNull: false,

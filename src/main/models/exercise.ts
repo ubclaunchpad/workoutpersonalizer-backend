@@ -44,7 +44,7 @@ module.exports = (sequelize: any, DataTypes: any) => {
         onDelete: 'CASCADE',
       });
       Exercise.belongsToMany(models.User, {
-        through: 'SavedExercise',
+        through: 'SavedExercises',
         foreignKey: 'exerciseId',
         onDelete: 'CASCADE',
       });
