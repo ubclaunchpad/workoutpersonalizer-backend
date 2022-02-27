@@ -5,7 +5,6 @@ import { Route } from './constant/Route';
 
 import { FilterController } from './controller/FilterController';
 import { FilterRouter } from './route/FilterRouter';
-
 import { ExerciseController } from './controller/ExerciseController';
 import { ExerciseRouter } from './route/ExerciseRouter';
 import { WorkoutController } from './controller/WorkoutController';
@@ -39,7 +38,6 @@ export class App {
     app.use(bodyParser.json());
     app.get('/', (_req, res) => res.send('Hello World'));
 
-    // TODO: create remaining controllers and routes
     const filterController = new FilterController();
     const filterRouter = new FilterRouter(filterController);
     app.use(Route.FILTERS, filterRouter.getRoutes());
