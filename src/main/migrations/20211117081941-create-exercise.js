@@ -7,7 +7,9 @@ const exercises = [
     description: 'Stretch from side to side!',
     thumbnailSrc: 'https://teamworkoutplatform.s3.us-west-2.amazonaws.com/Clip+1+Thumbnail.png',
     videoSrc: 'https://teamworkoutplatform.s3.us-west-2.amazonaws.com/Clip+1.mp4',
-    length: 30
+    length: 30,
+    createdAt: new Date(),
+    updatedAt: new Date()
   },
   {
     id: 2,
@@ -15,7 +17,9 @@ const exercises = [
     description: 'Circular arms!',
     thumbnailSrc: 'https://teamworkoutplatform.s3.us-west-2.amazonaws.com/Clip+2+Thumbnail.png',
     videoSrc: 'https://teamworkoutplatform.s3.us-west-2.amazonaws.com/Clip+2.mp4',
-    length: 30
+    length: 30,
+    createdAt: new Date(),
+    updatedAt: new Date()
   },
   {
     id: 3,
@@ -23,7 +27,9 @@ const exercises = [
     description: 'Rotational neck circles',
     thumbnailSrc: 'https://teamworkoutplatform.s3.us-west-2.amazonaws.com/Clip+3+Thumbnail.png',
     videoSrc: 'https://teamworkoutplatform.s3.us-west-2.amazonaws.com/Clip+3.mp4',
-    length: 30
+    length: 30,
+    createdAt: new Date(),
+    updatedAt: new Date()
   },
   {
     id: 4,
@@ -31,7 +37,9 @@ const exercises = [
     description: 'Stretch your right hip flexor!',
     thumbnailSrc: 'https://teamworkoutplatform.s3.us-west-2.amazonaws.com/Clip+4+Thumbnail.png',
     videoSrc: 'https://teamworkoutplatform.s3.us-west-2.amazonaws.com/Clip+4.mp4',
-    length: 30
+    length: 30,
+    createdAt: new Date(),
+    updatedAt: new Date()
   },
   {
     id: 5,
@@ -39,7 +47,9 @@ const exercises = [
     description: 'Let\'s stretch those hamstrings!',
     thumbnailSrc: 'https://teamworkoutplatform.s3.us-west-2.amazonaws.com/Clip+5+Thumbnail.png',
     videoSrc: 'https://teamworkoutplatform.s3.us-west-2.amazonaws.com/Clip+5.mp4',
-    length: 30
+    length: 30,
+    createdAt: new Date(),
+    updatedAt: new Date()
   }
 ];
 
@@ -72,7 +82,15 @@ module.exports = {
         length: {
           type: Sequelize.DECIMAL,
           allowNull: false,
-        }
+        },
+        createdAt: {
+          type: Sequelize.DATE,
+          allowNull: false,
+        },
+        updatedAt: {
+          type: Sequelize.DATE,
+          allowNull: false,
+        },
       })
       .then(() => {
         return queryInterface.bulkInsert('Exercises', exercises);
