@@ -60,7 +60,11 @@ export class App {
     app.use(Route.EXERCISES, exerciseRouter.getRoutes());
   }
 
-  exposeExpressForTest(): { app: Express; server: Server } {
-    return { app: this.app, server: this.server };
+  getExpressForTest(): Express {
+    return this.app;
+  }
+
+  getServerForTest(): Server {
+    return this.server;
   }
 }

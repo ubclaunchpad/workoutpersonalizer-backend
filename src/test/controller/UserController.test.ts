@@ -14,8 +14,8 @@ describe('Unit tests for UserController', () => {
   beforeAll(async () => {
     app = new App();
     await app.init();
-    expressApp = request(app.exposeExpressForTest().app);
-    server = app.exposeExpressForTest().server;
+    expressApp = request(app.getExpressForTest());
+    server = app.getServerForTest();
   });
 
   afterAll(() => {
