@@ -5,13 +5,6 @@ class ValidationError extends Error {
   }
 }
 
-class RouteValidationError extends ValidationError {
-  constructor(params: string, routeUsage: string) {
-    super(`Bad params: ${params}. Usage: ${routeUsage}`);
-    this.name = this.constructor.name;
-  }
-}
-
 class RequestBodyValidationError extends ValidationError {
   constructor(message: string, params?: string[]) {
     super(params ? `Bad params: ${params}` : message);
@@ -26,4 +19,4 @@ class DatabaseError extends Error {
   }
 }
 
-export { RouteValidationError, RequestBodyValidationError, DatabaseError };
+export { RequestBodyValidationError, DatabaseError };

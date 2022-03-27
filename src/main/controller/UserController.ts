@@ -1,22 +1,13 @@
 import { Request, Response } from 'express';
 import Joi from 'joi';
-import { Route } from '../constant/Route';
 import db from '../model';
 import { WorkoutAttributes } from '../model/workout';
 import { WorkoutValidation } from '../validation/WorkoutValidation';
-import {
-  DatabaseError,
-  RequestBodyValidationError,
-  RouteValidationError,
-} from '../error/Error';
+import { DatabaseError, RequestBodyValidationError } from '../error/Error';
 
 export class UserController {
   getUser = async (req: Request, res: Response): Promise<any> => {
     try {
-      if (!req.params.userId) {
-        throw new RouteValidationError('userId', `/${Route.USERS}/:userId`);
-      }
-
       const user = await db.User.findOne({
         attributes: ['firstName', 'lastName', 'username', 'email'],
         where: { id: req.params.userId },
@@ -24,23 +15,12 @@ export class UserController {
 
       return res.status(200).send(user);
     } catch (e) {
-      if (e instanceof RouteValidationError) {
-        return res.status(400).send(e);
-      } else {
-        return res.status(400).send(e);
-      }
+      return res.status(400).send(new DatabaseError('Error getting user'));
     }
   };
 
   getSavedExercises = async (req: Request, res: Response): Promise<any> => {
     try {
-      if (!req.params.userId) {
-        throw new RouteValidationError(
-          'userId',
-          `/${Route.USERS}/:userId/savedExercises`
-        );
-      }
-
       const savedExercises = await db.User.findAll({
         where: { id: req.params.userId },
         include: {
@@ -57,25 +37,14 @@ export class UserController {
           savedExercises.length > 0 ? savedExercises[0].savedExercises : []
         );
     } catch (e) {
-      if (e instanceof RouteValidationError) {
-        return res.status(400).send(e);
-      } else {
-        return res
-          .status(400)
-          .send(new DatabaseError('Error getting saved exercises'));
-      }
+      return res
+        .status(400)
+        .send(new DatabaseError('Error getting saved exercises'));
     }
   };
 
   getAllBasicWorkouts = async (req: Request, res: Response): Promise<any> => {
     try {
-      if (!req.params.userId) {
-        throw new RouteValidationError(
-          'userId',
-          `/${Route.USERS}/:userId/workouts`
-        );
-      }
-
       const workouts = await db.User.findAll({
         where: { id: req.params.userId },
         include: {
@@ -95,13 +64,7 @@ export class UserController {
         .status(200)
         .send(workouts.length > 0 ? workouts[0].workouts : []);
     } catch (e) {
-      if (e instanceof RouteValidationError) {
-        return res.status(400).send(e);
-      } else {
-        return res
-          .status(400)
-          .send(new DatabaseError('Error getting workouts'));
-      }
+      return res.status(400).send(new DatabaseError('Error getting workouts'));
     }
   };
 
@@ -110,13 +73,6 @@ export class UserController {
     res: Response
   ): Promise<any> => {
     try {
-      if (!req.params.userId) {
-        throw new RouteValidationError(
-          'userId',
-          `/${Route.USERS}/:userId/workouts`
-        );
-      }
-
       const workouts = await db.User.findAll({
         where: { id: req.params.userId },
         include: {
@@ -130,25 +86,12 @@ export class UserController {
         .status(200)
         .send(workouts.length > 0 ? workouts[0].workouts : []);
     } catch (e) {
-      if (e instanceof RouteValidationError) {
-        return res.status(400).send(e);
-      } else {
-        return res
-          .status(400)
-          .send(new DatabaseError('Error getting workouts'));
-      }
+      return res.status(400).send(new DatabaseError('Error getting workouts'));
     }
   };
 
   getBasicWorkout = async (req: Request, res: Response): Promise<any> => {
     try {
-      if (!req.params.workoutId) {
-        throw new RouteValidationError(
-          'workoutId',
-          `/${Route.USERS}/:userId/workouts/basic/:workoutId`
-        );
-      }
-
       const workout = await db.User.findOne({
         where: { id: req.params.userId },
         include: {
@@ -169,11 +112,7 @@ export class UserController {
         .status(200)
         .send(workout.workouts.length > 0 ? workout.workouts[0] : []);
     } catch (e) {
-      if (e instanceof RouteValidationError) {
-        return res.status(400).send(e);
-      } else {
-        return res.status(400).send(new DatabaseError('Error getting workout'));
-      }
+      return res.status(400).send(new DatabaseError('Error getting workout'));
     }
   };
 
@@ -204,13 +143,6 @@ export class UserController {
   deleteWorkout = async (req: Request, res: Response): Promise<any> => {
     try {
       // TODO: validate that the user with userId is logged in
-      if (!req.params.workoutId) {
-        throw new RouteValidationError(
-          'workoutId',
-          `:userId${Route.WORKOUTS}/:workoutId`
-        );
-      }
-
       await db.Workout.destroy({
         where: {
           id: req.params.workoutId,
@@ -220,13 +152,7 @@ export class UserController {
 
       return res.status(200).end();
     } catch (e) {
-      if (e instanceof RouteValidationError) {
-        return res.status(400).send(e);
-      } else {
-        return res
-          .status(400)
-          .send(new DatabaseError('Error deleting workout'));
-      }
+      return res.status(400).send(new DatabaseError('Error deleting workout'));
     }
   };
 }

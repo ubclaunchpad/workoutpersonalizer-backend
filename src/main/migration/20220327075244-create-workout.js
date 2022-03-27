@@ -11,7 +11,7 @@ const workouts = [
     totalWorkoutTime: 510,
     creationDate: '2022-02-27T01:38:52.188Z',
     lastModificationDate: '2022-02-27T01:38:52.188Z',
-    deletionDate: '2022-02-27T01:38:52.188Z'
+    deletionDate: '2022-02-27T01:38:52.188Z',
   },
   {
     id: '5015cb45-bde5-40f4-b0b8-027d960f2e92',

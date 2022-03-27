@@ -40,6 +40,11 @@ describe('Unit tests for UserController', () => {
     });
   });
 
+  test('GET /users/:userId - userId regex error', async () => {
+    const res = await expressApp.get('/users/123a');
+    expect(res.status).toEqual(404);
+  });
+
   test('GET /users/:userId/savedExercises', async () => {
     const res = await expressApp.get(
       '/users/b70820ae-d0a3-411b-9217-0bf2370e7139/savedExercises'
@@ -161,14 +166,26 @@ describe('Unit tests for UserController', () => {
       name: '5 Minute Stretch',
       imageUrl: 'thisissampleimageurl',
       totalWorkoutTime: 240,
-      creationDate: '2021-11-23 13:02:51.023-08',
-      lastModificationDate: '2021-11-23 13:02:51.023-08',
-      deletionDate: '2021-11-23 13:02:51.023-08',
+      creationDate: '2021-11-23T21:02:51.023Z',
+      deletionDate: '2021-11-23T21:02:51.023Z',
     };
-    const res = await expressApp
+
+    let res = await expressApp.get(
+      `/users/${testExistentUserId}/workouts/basic`
+    );
+    const beforePostTupleCount = res.body.length;
+
+    res = await expressApp
       .post(`/users/${testExistentUserId}/workouts`)
       .send(testNewWorkout);
+
     expect(res.status).toEqual(200);
+    expect(res.body.id).toEqual(testNewWorkout.id);
+    expect(res.body.name).toEqual(testNewWorkout.name);
+
+    res = await expressApp.get(`/users/${testExistentUserId}/workouts/basic`);
+    const afterPostTupleCount = res.body.length;
+    expect(afterPostTupleCount).toEqual(beforePostTupleCount + 1);
   });
 
   test('DELETE /users/:userId/workouts/:workoutId', async () => {
