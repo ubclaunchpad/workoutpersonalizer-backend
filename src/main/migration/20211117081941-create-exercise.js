@@ -34,8 +34,8 @@ const exercises = [
     videoSrc:
       'https://teamworkoutplatform.s3.us-west-2.amazonaws.com/Clip+3.mp4',
     length: 30,
-    createdAt: new Date(),
-    updatedAt: new Date(),
+    createdAt: '2022-02-27T01:38:52.138Z',
+    updatedAt: '2022-02-27T01:38:52.138Z',
   },
   {
     id: 4,
@@ -46,8 +46,8 @@ const exercises = [
     videoSrc:
       'https://teamworkoutplatform.s3.us-west-2.amazonaws.com/Clip+4.mp4',
     length: 30,
-    createdAt: new Date(),
-    updatedAt: new Date(),
+    createdAt: '2022-02-27T01:38:52.138Z',
+    updatedAt: '2022-02-27T01:38:52.138Z',
   },
   {
     id: 5,
@@ -58,8 +58,8 @@ const exercises = [
     videoSrc:
       'https://teamworkoutplatform.s3.us-west-2.amazonaws.com/Clip+5.mp4',
     length: 30,
-    createdAt: new Date(),
-    updatedAt: new Date(),
+    createdAt: '2022-02-27T01:38:52.138Z',
+    updatedAt: '2022-02-27T01:38:52.138Z',
   },
 ];
 

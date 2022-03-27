@@ -1,10 +1,11 @@
 import request from 'supertest';
 import { Server } from 'http';
 import { App } from '../../main/App';
+import { Route } from '../../main/constant/Route';
 
 describe('Unit tests for UserController', () => {
   let app: App;
-  let expressApp: any;
+  let express: any;
   let server: Server;
 
   const testExistentUserId = 'b70820ae-d0a3-411b-9217-0bf2370e7139';
@@ -14,7 +15,7 @@ describe('Unit tests for UserController', () => {
   beforeAll(async () => {
     app = new App();
     await app.init();
-    expressApp = request(app.getExpressForTest());
+    express = request(app.getExpressForTest());
     server = app.getServerForTest();
   });
 
@@ -23,13 +24,13 @@ describe('Unit tests for UserController', () => {
   });
 
   test('sanity', async () => {
-    const res = await expressApp.get('/');
+    const res = await express.get('/');
     expect(res.text).toEqual('Hello World');
   });
 
   test('GET /users/:userId', async () => {
-    const res = await expressApp.get(
-      '/users/b70820ae-d0a3-411b-9217-0bf2370e7139'
+    const res = await express.get(
+      `${Route.USERS}/b70820ae-d0a3-411b-9217-0bf2370e7139`
     );
     expect(res.status).toEqual(200);
     expect(res.body).toEqual({
@@ -41,13 +42,13 @@ describe('Unit tests for UserController', () => {
   });
 
   test('GET /users/:userId - userId regex error', async () => {
-    const res = await expressApp.get('/users/123a');
+    const res = await express.get(`${Route.USERS}/123a`);
     expect(res.status).toEqual(404);
   });
 
   test('GET /users/:userId/savedExercises', async () => {
-    const res = await expressApp.get(
-      '/users/b70820ae-d0a3-411b-9217-0bf2370e7139/savedExercises'
+    const res = await express.get(
+      `${Route.USERS}/b70820ae-d0a3-411b-9217-0bf2370e7139/savedExercises`
     );
     expect(res.status).toEqual(200);
     expect(res.body).toEqual([
@@ -79,8 +80,8 @@ describe('Unit tests for UserController', () => {
   });
 
   test('GET /users/:userId/workouts/detailed - user exists', async () => {
-    const res = await expressApp.get(
-      `/users/${testExistentUserId}/workouts/detailed`
+    const res = await express.get(
+      `${Route.USERS}/${testExistentUserId}/workouts/detailed`
     );
     expect(res.status).toEqual(200);
     expect(res.body).toEqual([
@@ -110,16 +111,16 @@ describe('Unit tests for UserController', () => {
   });
 
   test('GET /users/:userId/workouts/detailed - user does not exist', async () => {
-    const res = await expressApp.get(
-      `/users/${testNonExistentUserId}/workouts/detailed`
+    const res = await express.get(
+      `${Route.USERS}/${testNonExistentUserId}/workouts/detailed`
     );
     expect(res.status).toEqual(200);
     expect(res.body).toEqual([]);
   });
 
   test('GET /users/:userId/workouts/basic - user exists', async () => {
-    const res = await expressApp.get(
-      `/users/${testExistentUserId}/workouts/basic`
+    const res = await express.get(
+      `${Route.USERS}/${testExistentUserId}/workouts/basic`
     );
     expect(res.status).toEqual(200);
     expect(res.body).toEqual([
@@ -139,16 +140,16 @@ describe('Unit tests for UserController', () => {
   });
 
   test('GET /users/:userId/workouts/basic - user does not exist', async () => {
-    const res = await expressApp.get(
-      `/users/${testNonExistentUserId}/workouts/basic`
+    const res = await express.get(
+      `${Route.USERS}/${testNonExistentUserId}/workouts/basic`
     );
     expect(res.status).toEqual(200);
     expect(res.body).toEqual([]);
   });
 
   test('GET /users/:userId/workouts/basic/:workoutId', async () => {
-    const res = await expressApp.get(
-      `/users/${testExistentUserId}/workouts/basic/${testWorkoutId}`
+    const res = await express.get(
+      `${Route.USERS}/${testExistentUserId}/workouts/basic/${testWorkoutId}`
     );
 
     expect(res.status).toEqual(200);
@@ -170,27 +171,27 @@ describe('Unit tests for UserController', () => {
       deletionDate: '2021-11-23T21:02:51.023Z',
     };
 
-    let res = await expressApp.get(
-      `/users/${testExistentUserId}/workouts/basic`
+    let res = await express.get(
+      `${Route.USERS}/${testExistentUserId}/workouts/basic`
     );
     const beforePostTupleCount = res.body.length;
 
-    res = await expressApp
-      .post(`/users/${testExistentUserId}/workouts`)
+    res = await express
+      .post(`${Route.USERS}/${testExistentUserId}/workouts`)
       .send(testNewWorkout);
 
     expect(res.status).toEqual(200);
     expect(res.body.id).toEqual(testNewWorkout.id);
     expect(res.body.name).toEqual(testNewWorkout.name);
 
-    res = await expressApp.get(`/users/${testExistentUserId}/workouts/basic`);
+    res = await express.get(`/users/${testExistentUserId}/workouts/basic`);
     const afterPostTupleCount = res.body.length;
     expect(afterPostTupleCount).toEqual(beforePostTupleCount + 1);
   });
 
   test('DELETE /users/:userId/workouts/:workoutId', async () => {
-    const res = await expressApp.delete(
-      `/users/${testExistentUserId}/workouts/${testWorkoutId}`
+    const res = await express.delete(
+      `${Route.USERS}/${testExistentUserId}/workouts/${testWorkoutId}`
     );
     expect(res.status).toEqual(200);
   });
