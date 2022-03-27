@@ -7,9 +7,9 @@ export interface WorkoutAttributes {
   name: string;
   imageUrl: string;
   totalWorkoutTime: number;
-  creationDate: Date;
-  lastModificationDate: Date;
-  deletionDate: Date;
+  creationDate?: Date;
+  lastModificationDate?: Date;
+  deletionDate?: Date;
 }
 
 module.exports = (sequelize: any, DataTypes: any) => {

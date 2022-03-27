@@ -5,14 +5,14 @@ const savedExercises = [
   {
     userId: 'b70820ae-d0a3-411b-9217-0bf2370e7139',
     exerciseId: 1,
-    createdAt: new Date(),
-    updatedAt: new Date(),
+    createdAt: '2022-02-27T01:38:52.138Z',
+    updatedAt: '2022-02-27T01:38:52.138Z',
   },
   {
     userId: 'b70820ae-d0a3-411b-9217-0bf2370e7139',
     exerciseId: 2,
-    createdAt: new Date(),
-    updatedAt: new Date(),
+    createdAt: '2022-02-27T01:38:52.138Z',
+    updatedAt: '2022-02-27T01:38:52.138Z',
   },
 ];
 

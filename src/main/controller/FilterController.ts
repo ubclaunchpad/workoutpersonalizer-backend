@@ -1,7 +1,7 @@
 import { NextFunction, Request, Response } from 'express';
-import { MuscleGroupAttributes } from '../models/musclegroup';
+import { MuscleGroupAttributes } from '../model/musclegroup';
 import { WhereOptions } from 'sequelize';
-import db from '../models';
+import db from '../model';
 
 export class FilterController {
   getAllMuscleGroups = async (

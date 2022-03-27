@@ -9,9 +9,9 @@ const workouts = [
     imageUrl:
       'https://teamworkoutplatform.s3.us-west-2.amazonaws.com/Exercise+1+Thumbnail.png',
     totalWorkoutTime: 510,
-    creationDate: new Date(),
-    lastModificationDate: new Date(),
-    deletionDate: new Date(),
+    creationDate: '2022-02-27T01:38:52.188Z',
+    lastModificationDate: '2022-02-27T01:38:52.188Z',
+    deletionDate: '2022-02-27T01:38:52.188Z'
   },
   {
     id: '5015cb45-bde5-40f4-b0b8-027d960f2e92',
@@ -20,9 +20,9 @@ const workouts = [
     imageUrl:
       'https://teamworkoutplatform.s3.us-west-2.amazonaws.com/Clip+1+Thumbnail.png',
     totalWorkoutTime: 240,
-    creationDate: new Date(),
-    lastModificationDate: new Date(),
-    deletionDate: new Date(),
+    creationDate: '2022-02-27T01:38:52.188Z',
+    lastModificationDate: '2022-02-27T01:38:52.188Z',
+    deletionDate: '2022-02-27T01:38:52.188Z',
   },
 ];
 

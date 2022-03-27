@@ -1,6 +1,6 @@
 import express, { Express } from 'express';
 import bodyParser from 'body-parser';
-import db from './models';
+import db from './model';
 import { Route } from './constant/Route';
 
 import { FilterController } from './controller/FilterController';
@@ -11,22 +11,27 @@ import { WorkoutController } from './controller/WorkoutController';
 import { WorkoutRouter } from './route/WorkoutRouter';
 import { UserController } from './controller/UserController';
 import { UserRouter } from './route/UserRouter';
+import { Server } from 'http';
 
 /* eslint-disable  no-console */
 
 export class App {
+  private app: Express;
+  private server: Server;
+  private port: number;
+
   async init(): Promise<void> {
     try {
-      const app = express();
+      this.app = express();
 
-      await this.registerHandlersAndRoutes(app);
+      await this.registerHandlersAndRoutes(this.app);
 
       await db.sequelize.sync();
 
-      const PORT = 8000;
-      app.listen(PORT, () => {
+      this.port = 8000;
+      this.server = this.app.listen(this.port, () => {
         console.log(
-          `⚡️[server]: Server is running at http://localhost:${PORT}`
+          `⚡️[server]: Server is running at http://localhost:${this.port}`
         );
       });
     } catch (error) {
@@ -53,5 +58,9 @@ export class App {
     const exerciseController = new ExerciseController();
     const exerciseRouter = new ExerciseRouter(exerciseController);
     app.use(Route.EXERCISES, exerciseRouter.getRoutes());
+  }
+
+  exposeExpressForTest(): { app: Express; server: Server } {
+    return { app: this.app, server: this.server };
   }
 }
