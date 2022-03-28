@@ -3,16 +3,6 @@ import db from '../models';
 import { Route } from '../constant/Route';
 
 export class WorkoutController {
-  // TODO: implement all get/add/edit/delete with db & Sequelize
-  getAllWorkouts = async (_req: Request, res: Response): Promise<any> => {
-    try {
-      const workouts = await db.Workout.findAll();
-      return res.status(200).send(workouts);
-    } catch (e) {
-      return res.status(400).send({ e });
-    }
-  };
-
   // (9 - CC & WP) Retrieve detailed information about workout (title, duration, video link), exercises and their order, and info regarding exercises
   getWorkoutDetails = async (req: Request, res: Response): Promise<any> => {
     try {
@@ -46,16 +36,4 @@ export class WorkoutController {
       return res.status(400).send({ e });
     }
   };
-
-  /* Testing WorkoutExercise Join table addExercise
-  addExerciseToWorkout = (req: Request, res: Response) => {
-    try {
-      const newWorkout = db.Workout.create(req.body.workout);
-      const newExercise = db.Exercise.create(req.body.exercise);
-      newWorkout.addExercise(newExercise)
-    } catch (e) {
-
-    }
-  };
-  */
 }

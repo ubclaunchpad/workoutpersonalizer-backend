@@ -10,8 +10,6 @@ export class WorkoutRouter {
   }
 
   getRoutes = (): Router => {
-    this.workoutRouter.get('/', this.workoutController.getAllWorkouts);
-
     this.workoutRouter.get(
       '/detailed/:workoutID(\\b[0-9a-f]{8}\\b-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{4}-\\b[0-9a-f]{12}\\b)',
       this.workoutController.getWorkoutDetails

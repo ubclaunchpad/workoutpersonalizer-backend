@@ -10,8 +10,6 @@ export class ExerciseRouter {
   }
 
   getRoutes = (): Router => {
-    this.exerciseRouter.get('/', this.exerciseController.getAllExercises);
-
     this.exerciseRouter.get(
       '/detailed/:exerciseID(\\d+)',
       this.exerciseController.getExerciseDetailed
