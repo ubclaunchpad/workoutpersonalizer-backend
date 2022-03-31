@@ -1,8 +1,7 @@
 import { Express } from 'express';
 
-/* eslint-disable  no-unused-vars */
-
-describe('Unit tests for FilterController', function () {
+describe('Unit tests for FilterController', () => {
+  // eslint-disable-next-line @typescript-eslint/no-unused-vars
   let app: Express;
 
   beforeAll(async () => {
