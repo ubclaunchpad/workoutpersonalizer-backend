@@ -110,7 +110,7 @@ export class UserController {
 
       return res
         .status(200)
-        .send(workout.workouts.length > 0 ? workout.workouts[0] : []);
+        .send(workout?.workouts.length > 0 ? workout?.workouts[0] : []);
     } catch (e) {
       return res.status(400).send(new DatabaseError('Error getting workout'));
     }
@@ -136,6 +136,45 @@ export class UserController {
         return res.status(400).send(new RequestBodyValidationError(e.message));
       } else {
         return res.status(400).send(new DatabaseError('Error adding workout'));
+      }
+    }
+  };
+
+  updateWorkout = async (req: Request, res: Response): Promise<any> => {
+    try {
+      // TODO: validate that the user with userId is logged in
+      req.body.userId = req.params.userId;
+      const { value, error } = WorkoutValidation.schema.validate(req.body, {
+        abortEarly: false,
+      });
+
+      if (error) {
+        throw error;
+      }
+
+      const workout = await db.Workout.findOne({
+        where: {
+          id: req.body.id,
+          userId: req.body.userId,
+        },
+      });
+
+      if (!workout) {
+        throw error;
+      }
+
+      const newWorkout: WorkoutAttributes = { ...value };
+
+      const updatedWorkout = await workout.update(newWorkout);
+
+      return res.status(200).send(updatedWorkout);
+    } catch (e) {
+      if (e instanceof Joi.ValidationError) {
+        return res.status(400).send(new RequestBodyValidationError(e.message));
+      } else {
+        return res
+          .status(400)
+          .send(new DatabaseError('Error updating workout'));
       }
     }
   };

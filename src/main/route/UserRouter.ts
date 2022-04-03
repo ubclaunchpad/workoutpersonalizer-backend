@@ -38,6 +38,11 @@ export class UserRouter {
       this.userController.addWorkout
     );
 
+    this.userRouter.put(
+      `/:userId(${UUID_REGEX})/workouts`,
+      this.userController.updateWorkout
+    );
+
     this.userRouter.delete(
       `/:userId(${UUID_REGEX})/workouts/:workoutId(${UUID_REGEX})`,
       this.userController.deleteWorkout

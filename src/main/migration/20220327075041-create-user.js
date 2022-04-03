@@ -3,7 +3,7 @@ const { UUIDV4 } = require('sequelize');
 
 const users = [
   {
-    id: 'b70820ae-d0a3-411b-9217-0bf2370e7139',
+    id: 'b70820ae-d0a3-411b-9217-0bf2370e7142',
     firstName: 'LP',
     lastName: 'Team',
     username: 'lp_team',

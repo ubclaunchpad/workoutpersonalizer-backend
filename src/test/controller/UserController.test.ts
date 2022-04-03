@@ -163,7 +163,7 @@ describe('Unit tests for UserController', () => {
 
   test('POST /users/:userId/workouts', async () => {
     const testNewWorkout = {
-      id: 'a30820ae-d0a3-411b-9217-0bf2370e7139',
+      id: 'a30820ae-d0a3-411b-9217-0bf2370e7147',
       name: '5 Minute Stretch',
       imageUrl: 'thisissampleimageurl',
       totalWorkoutTime: 240,
@@ -188,6 +188,42 @@ describe('Unit tests for UserController', () => {
     const afterPostTupleCount = res.body.length;
     expect(afterPostTupleCount).toEqual(beforePostTupleCount + 1);
   });
+
+  // test('PUT /users/:userId/workouts', async () => {
+  //   let beforePutTupleCount: number = 0;
+  //
+  //   // Updated name, imageUrl fields
+  //   const testNewWorkout = {
+  //     id: testWorkoutId,
+  //     name: '5 Minute Stretch',
+  //     imageUrl: 'thisissampleimageurl',
+  //     totalWorkoutTime: '510',
+  //     creationDate: '2022-02-27T01:38:52.188Z',
+  //     lastModificationDate: '2022-02-27T01:38:52.188Z',
+  //   };
+  //
+  //   return express.get(
+  //       `${Route.USERS}/${testExistentUserId}/workouts/basic`
+  //     ).then((currentBasicWorkouts: any) => {
+  //     beforePutTupleCount = currentBasicWorkouts.body.length;
+  //
+  //     return express
+  //       .put(`${Route.USERS}/${testExistentUserId}/workouts`)
+  //       .send(testNewWorkout);
+  //   }).then((updatedWorkout: any) => {
+  //
+  //     expect(updatedWorkout.status).toEqual(200);
+  //     expect(updatedWorkout.body.id).toEqual(testNewWorkout.id);
+  //     expect(updatedWorkout.body.name).toEqual(testNewWorkout.name);
+  //
+  //     return express.get(`/users/${testExistentUserId}/workouts/basic`);
+  //   }).then((updatedBasicWorkouts: any) => {
+  //     const afterPutTupleCount = updatedBasicWorkouts.body.length;
+  //     expect(afterPutTupleCount).toEqual(beforePutTupleCount);
+  //   }).catch((error: Error) => {
+  //     // fail?
+  //   });
+  // });
 
   test('DELETE /users/:userId/workouts/:workoutId', async () => {
     const res = await express.delete(
