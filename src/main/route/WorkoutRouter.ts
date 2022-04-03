@@ -1,4 +1,4 @@
-import express, { Router } from 'express';
+import express, { Router, Request, Response, NextFunction } from 'express';
 import { WorkoutController } from '../controller/WorkoutController';
 
 export class WorkoutRouter {
@@ -9,12 +9,7 @@ export class WorkoutRouter {
     this.workoutController = workoutController;
   }
 
-  getRoutes = (): Router => {
-    this.workoutRouter.get(
-      '/detailed/:workoutID(\\b[0-9a-f]{8}\\b-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{4}-\\b[0-9a-f]{12}\\b)',
-      this.workoutController.getWorkoutDetails
-    );
-
+  getRoutes(): Router {
     return this.workoutRouter;
-  };
+  }
 }

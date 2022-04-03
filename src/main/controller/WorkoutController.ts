@@ -1,5 +1,5 @@
 import { Request, Response } from 'express';
-import db from '../models';
+import db from '../model';
 import { Route } from '../constant/Route';
 
 export class WorkoutController {
@@ -11,7 +11,7 @@ export class WorkoutController {
       }
 
       // TODO: make sure the user has permissions to view this workout (userId check? private / public check?)
-      const workouts = await db.Workout.findOne({
+      const workout = await db.Workout.findOne({
         where: {
           id: req.params.workoutID,
         },
@@ -31,7 +31,7 @@ export class WorkoutController {
         ],
       });
 
-      return res.status(200).send(workouts);
+      return res.status(200).send(workout);
     } catch (e) {
       return res.status(400).send({ e });
     }

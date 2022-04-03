@@ -9,12 +9,14 @@ export class ExerciseRouter {
     this.exerciseController = exerciseController;
   }
 
-  getRoutes = (): Router => {
+  getRoutes(): Router {
+    this.exerciseRouter.get('/', this.exerciseController.getAllExercises);
+    this.exerciseRouter.post('/', this.exerciseController.addExercise);
     this.exerciseRouter.get(
-      '/detailed/:exerciseID(\\d+)',
-      this.exerciseController.getExerciseDetailed
+      '/detailed/:exerciseId(\\d+)',
+      this.exerciseController.getDetailedExercise
     );
 
     return this.exerciseRouter;
-  };
+  }
 }

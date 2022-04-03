@@ -45,6 +45,7 @@ module.exports = (sequelize: any, DataTypes: any) => {
       });
       Exercise.belongsToMany(models.User, {
         through: 'SavedExercises',
+        foreignKey: 'exerciseId',
         onDelete: 'CASCADE',
       });
     }
@@ -81,6 +82,7 @@ module.exports = (sequelize: any, DataTypes: any) => {
     {
       sequelize,
       modelName: 'Exercise',
+      timestamps: true,
     }
   );
 
