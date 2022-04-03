@@ -28,7 +28,7 @@ export class App {
 
       await db.sequelize.sync();
 
-      this.port = 8000;
+      this.port = 80;
       this.server = this.app.listen(this.port, () => {
         console.log(
           `⚡️[server]: Server is running at http://localhost:${this.port}`
