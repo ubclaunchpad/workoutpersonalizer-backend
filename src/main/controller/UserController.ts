@@ -127,7 +127,6 @@ export class UserController {
         where: {
           id: req.params.userId,
         },
-        attributes: [],
         include: [
           {
             model: db.Workout,
