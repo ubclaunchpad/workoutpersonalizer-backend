@@ -2,6 +2,7 @@ import express, { Express } from 'express';
 import bodyParser from 'body-parser';
 import db from './model';
 import { Route } from './constant/Route';
+import cors from 'cors';
 
 import { FilterController } from './controller/FilterController';
 import { FilterRouter } from './route/FilterRouter';
@@ -41,6 +42,7 @@ export class App {
 
   async registerHandlersAndRoutes(app: Express): Promise<void> {
     app.use(bodyParser.json());
+    app.use(cors());
     app.get('/', (_req, res) => res.send('Hello World'));
 
     const filterController = new FilterController();
