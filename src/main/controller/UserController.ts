@@ -32,6 +32,12 @@ export class UserController {
           as: 'savedExercises',
           required: true,
           through: { attributes: [] },
+          include: [
+            db.DifficultyLevel,
+            db.ExerciseType,
+            db.Equipment,
+            db.MuscleGroup,
+          ],
         },
       });
 

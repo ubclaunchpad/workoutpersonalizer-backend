@@ -61,6 +61,10 @@ describe('Unit tests for UserController', () => {
         length: 30,
         createdAt: '2022-02-27T01:38:52.138Z',
         updatedAt: '2022-02-27T01:38:52.138Z',
+        DifficultyLevels: [],
+        ExerciseTypes: [],
+        Equipment: [],
+        MuscleGroups: [],
       },
       {
         id: 2,
@@ -73,6 +77,10 @@ describe('Unit tests for UserController', () => {
         length: 30,
         createdAt: '2022-02-27T01:38:52.138Z',
         updatedAt: '2022-02-27T01:38:52.138Z',
+        DifficultyLevels: [],
+        ExerciseTypes: [],
+        Equipment: [],
+        MuscleGroups: [],
       },
     ]);
   });
