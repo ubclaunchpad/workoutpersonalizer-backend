@@ -127,6 +127,7 @@ export class UserController {
         where: {
           id: req.params.userId,
         },
+        attributes: [],
         include: [
           {
             model: db.Workout,
@@ -161,10 +162,10 @@ export class UserController {
       });
 
       return res
-        .status(workout != null ? 200 : 404)
+        .status(workout?.workouts.length > 0 ? 200 : 404)
         .send(
-          workout != null
-            ? workout.workouts
+          workout?.workouts.length > 0
+            ? workout.workouts[0]
             : new NotFoundError(req.params.workoutId)
         );
     } catch (e) {
