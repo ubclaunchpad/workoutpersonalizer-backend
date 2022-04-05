@@ -123,7 +123,6 @@ export class UserController {
   // (9 - CC & WP) Retrieve detailed information about workout (title, duration, video link), exercises and their order, and info regarding exercises
   getDetailedWorkout = async (req: Request, res: Response): Promise<any> => {
     try {
-      console.log(db);
       const workout = await db.User.findOne({
         where: {
           id: req.params.userId,
@@ -140,20 +139,20 @@ export class UserController {
               {
                 model: db.Exercise,
                 through: {
-                  attributes: ['orderNum']
+                  attributes: ['orderNum'],
                 },
                 attributes: [
                   'name',
                   'description',
                   'thumbnailSrc',
                   'videoSrc',
-                  'length'
+                  'length',
                 ],
                 include: [
                   db.DifficultyLevel,
                   db.ExerciseType,
                   db.Equipment,
-                  db.MuscleGroup
+                  db.MuscleGroup,
                 ],
                 required: true,
               },
