@@ -10,7 +10,8 @@ module.exports = {
      */
     await queryInterface.addColumn("WorkoutExercise", "orderNum", {
       type: Sequelize.INTEGER.UNSIGNED,
-      allowNull: false
+      allowNull: false,
+      defaultValue: 1
     });
   },
 
@@ -21,5 +22,6 @@ module.exports = {
      * Example:
      * await queryInterface.dropTable('users');
      */
+    await queryInterface.removeColumn("WorkoutExercise", "orderNum");
   }
 };
