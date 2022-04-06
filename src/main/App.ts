@@ -14,6 +14,7 @@ import { UserRouter } from './route/UserRouter';
 import Http from 'http';
 import Https from 'https';
 import fs from 'fs';
+import cors from 'cors';
 
 /* eslint-disable  no-console */
 
@@ -34,6 +35,7 @@ export class App {
       this.httpsPort = 8000;
       this.httpPort = 80;
 
+      // HTTPS Server Configurations
       this.server = Https.createServer(
         {
           key: fs.readFileSync('server.key'),
@@ -42,12 +44,13 @@ export class App {
         this.app
       );
 
+      // HTTP Server
       Http.createServer(this.app).listen(this.httpPort, () => {
         console.log(
           `⚡️[server]: Server is running at http://localhost:${this.httpPort}`
         );
       });
-
+      // HTTPS Server
       this.server.listen(this.httpsPort, () => {
         console.log(
           `⚡️[server]: Server is running at https://localhost:${this.httpsPort}`
@@ -59,6 +62,7 @@ export class App {
   }
 
   async registerHandlersAndRoutes(app: Express): Promise<void> {
+    app.use(cors()); // Enable CORs headers
     app.use(bodyParser.json());
     app.get('/', (_req, res) => res.send('Hello World'));
 
