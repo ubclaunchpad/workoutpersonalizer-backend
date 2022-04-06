@@ -11,14 +11,17 @@ import { WorkoutController } from './controller/WorkoutController';
 import { WorkoutRouter } from './route/WorkoutRouter';
 import { UserController } from './controller/UserController';
 import { UserRouter } from './route/UserRouter';
-import { Server } from 'http';
+import Http from 'http';
+import Https from 'https';
+import fs from 'fs';
 
 /* eslint-disable  no-console */
 
 export class App {
   private app: Express;
-  private server: Server;
-  private port: number;
+  private server: Https.Server;
+  private httpsPort: number;
+  private httpPort: number;
 
   async init(): Promise<void> {
     try {
@@ -28,10 +31,26 @@ export class App {
 
       await db.sequelize.sync();
 
-      this.port = 80;
-      this.server = this.app.listen(this.port, () => {
+      this.httpsPort = 8000;
+      this.httpPort = 80;
+
+      this.server = Https.createServer(
+        {
+          key: fs.readFileSync('server.key'),
+          cert: fs.readFileSync('server.cert'),
+        },
+        this.app
+      );
+
+      Http.createServer(this.app).listen(this.httpPort, () => {
         console.log(
-          `⚡️[server]: Server is running at http://localhost:${this.port}`
+          `⚡️[server]: Server is running at http://localhost:${this.httpPort}`
+        );
+      });
+
+      this.server.listen(this.httpsPort, () => {
+        console.log(
+          `⚡️[server]: Server is running at https://localhost:${this.httpsPort}`
         );
       });
     } catch (error) {
@@ -64,7 +83,7 @@ export class App {
     return this.app;
   }
 
-  getServerForTest(): Server {
+  getServerForTest(): Https.Server {
     return this.server;
   }
 }
