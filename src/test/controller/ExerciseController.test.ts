@@ -31,7 +31,7 @@ describe('Unit tests for ExerciseController', () => {
           'https://teamworkoutplatform.s3.us-west-2.amazonaws.com/Clip+1+Thumbnail.png',
         videoSrc:
           'https://teamworkoutplatform.s3.us-west-2.amazonaws.com/Clip+1.mp4',
-        length: '30',
+        length: 30,
         createdAt: '2022-02-27T01:38:52.138Z',
         updatedAt: '2022-02-27T01:38:52.138Z',
       },
@@ -43,7 +43,7 @@ describe('Unit tests for ExerciseController', () => {
           'https://teamworkoutplatform.s3.us-west-2.amazonaws.com/Clip+2+Thumbnail.png',
         videoSrc:
           'https://teamworkoutplatform.s3.us-west-2.amazonaws.com/Clip+2.mp4',
-        length: '30',
+        length: 30,
         createdAt: '2022-02-27T01:38:52.138Z',
         updatedAt: '2022-02-27T01:38:52.138Z',
       },
@@ -55,7 +55,7 @@ describe('Unit tests for ExerciseController', () => {
           'https://teamworkoutplatform.s3.us-west-2.amazonaws.com/Clip+3+Thumbnail.png',
         videoSrc:
           'https://teamworkoutplatform.s3.us-west-2.amazonaws.com/Clip+3.mp4',
-        length: '30',
+        length: 30,
         createdAt: '2022-02-27T01:38:52.138Z',
         updatedAt: '2022-02-27T01:38:52.138Z',
       },
@@ -67,7 +67,7 @@ describe('Unit tests for ExerciseController', () => {
           'https://teamworkoutplatform.s3.us-west-2.amazonaws.com/Clip+4+Thumbnail.png',
         videoSrc:
           'https://teamworkoutplatform.s3.us-west-2.amazonaws.com/Clip+4.mp4',
-        length: '30',
+        length: 30,
         createdAt: '2022-02-27T01:38:52.138Z',
         updatedAt: '2022-02-27T01:38:52.138Z',
       },
@@ -79,7 +79,7 @@ describe('Unit tests for ExerciseController', () => {
           'https://teamworkoutplatform.s3.us-west-2.amazonaws.com/Clip+5+Thumbnail.png',
         videoSrc:
           'https://teamworkoutplatform.s3.us-west-2.amazonaws.com/Clip+5.mp4',
-        length: '30',
+        length: 30,
         createdAt: '2022-02-27T01:38:52.138Z',
         updatedAt: '2022-02-27T01:38:52.138Z',
       },
@@ -98,7 +98,7 @@ describe('Unit tests for ExerciseController', () => {
       description: 'desc6',
       thumbnailSrc: 's',
       videoSrc: 's',
-      length: '30',
+      length: 30,
     };
 
     res = await express.post(route).send(newExercise);

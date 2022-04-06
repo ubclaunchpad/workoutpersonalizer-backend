@@ -14,7 +14,7 @@
     "prestart": "yarn run build",
     "start": "nodemon src/main/Index.ts",
     "setup": "yarn sequelize-cli db:drop && yarn sequelize-cli db:create && yarn sequelize-cli db:migrate",
-    "pretest": "cross-env NODE_ENV=test yarn sequelize-cli db:drop && NODE_ENV=test yarn sequelize-cli db:create && NODE_ENV=test yarn sequelize-cli db:migrate",
+    "pretest": "cross-env NODE_ENV=test yarn sequelize-cli db:drop && cross-env NODE_ENV=test yarn sequelize-cli db:create && cross-env NODE_ENV=test yarn sequelize-cli db:migrate --to 20220327075244-create-workout.js && cross-env NODE_ENV=test yarn sequelize-cli db:migrate --from 20220404222612-update-workout-exercise.js --to 20220406061730-create-workout-exercise.js",
     "test": "cross-env NODE_ENV=test jest --verbose --detectOpenHandles",
     "lint": "eslint . --ext .ts,.tsx",
     "lintFix": "eslint . --ext .ts,.tsx --fix",
