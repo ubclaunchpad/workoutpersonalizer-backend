@@ -3,7 +3,11 @@ import Joi from 'joi';
 import db from '../model';
 import { WorkoutAttributes } from '../model/workout';
 import { WorkoutValidation } from '../validation/WorkoutValidation';
-import { DatabaseError, RequestBodyValidationError } from '../error/Error';
+import {
+  DatabaseError,
+  RequestBodyValidationError,
+  NotFoundError,
+} from '../error/Error';
 
 export class UserController {
   getUser = async (req: Request, res: Response): Promise<any> => {
@@ -111,6 +115,59 @@ export class UserController {
       return res
         .status(200)
         .send(workout?.workouts.length > 0 ? workout?.workouts[0] : []);
+    } catch (e) {
+      return res.status(400).send(new DatabaseError('Error getting workout'));
+    }
+  };
+
+  // (9 - CC & WP) Retrieve detailed information about workout (title, duration, video link), exercises and their order, and info regarding exercises
+  getDetailedWorkout = async (req: Request, res: Response): Promise<any> => {
+    try {
+      const workout = await db.User.findOne({
+        where: {
+          id: req.params.userId,
+        },
+        attributes: [],
+        include: [
+          {
+            model: db.Workout,
+            as: 'workouts',
+            attributes: ['name', 'totalWorkoutTime', 'imageUrl'],
+            where: { id: req.params.workoutId },
+            required: true,
+            include: [
+              {
+                model: db.Exercise,
+                through: {
+                  attributes: ['orderNum'],
+                },
+                attributes: [
+                  'name',
+                  'description',
+                  'thumbnailSrc',
+                  'videoSrc',
+                  'length',
+                ],
+                include: [
+                  db.DifficultyLevel,
+                  db.ExerciseType,
+                  db.Equipment,
+                  db.MuscleGroup,
+                ],
+                required: true,
+              },
+            ],
+          },
+        ],
+      });
+
+      return res
+        .status(workout?.workouts.length > 0 ? 200 : 404)
+        .send(
+          workout?.workouts.length > 0
+            ? workout.workouts[0]
+            : new NotFoundError(req.params.workoutId)
+        );
     } catch (e) {
       return res.status(400).send(new DatabaseError('Error getting workout'));
     }

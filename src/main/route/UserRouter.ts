@@ -33,6 +33,11 @@ export class UserRouter {
       this.userController.getBasicWorkout
     );
 
+    this.userRouter.get(
+      `/:userId(${UUID_REGEX})/workouts/detailed/:workoutId(${UUID_REGEX})`,
+      this.userController.getDetailedWorkout
+    );
+
     this.userRouter.post(
       `/:userId(${UUID_REGEX})/workouts`,
       this.userController.addWorkout
