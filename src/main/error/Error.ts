@@ -19,4 +19,10 @@ class DatabaseError extends Error {
   }
 }
 
-export { RequestBodyValidationError, DatabaseError };
+class NotFoundError extends Error {
+  constructor(message: string) {
+    super(message + ' not found');
+    this.name = this.constructor.name;
+  }
+}
+export { RequestBodyValidationError, DatabaseError, NotFoundError };
