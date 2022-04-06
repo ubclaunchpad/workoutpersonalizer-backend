@@ -2,7 +2,7 @@
 <br />
 <p align="center">
   <a href="https://github.com/ubclaunchpad/workoutpersonalizer-backend">
-    <img src="https://github.com/ubclaunchpad/workoutpersonalizer-backend/blob/cf11aa9af541d417c4a34714a69d3af76d5881ad/src/main/assets/FitHubLogo.png" alt="Logo" height="600" resize>
+    <img src="https://github.com/ubclaunchpad/workoutpersonalizer-backend/blob/cf11aa9af541d417c4a34714a69d3af76d5881ad/src/main/assets/FitHubLogo.png" alt="Logo" height="400" resize>
   </a>
   
   <h3 align="center">FitHub Server</h3> 
