@@ -1,7 +1,6 @@
-import { NextFunction, Request, Response } from 'express';
-import { MuscleGroupAttributes } from '../model/musclegroup';
-import { WhereOptions } from 'sequelize';
+import { Request, Response } from 'express';
 import db from '../model';
+import { DatabaseError } from '../error/Error';
 
 export class FilterController {
   getAllFilters = async (req: Request, res: Response): Promise<any> => {
@@ -20,7 +19,7 @@ export class FilterController {
 
       return res.send(filters);
     } catch (e) {
-      return res.status(400).send(new DatabaseError('Error getting exercise'));
+      return res.status(400).send(new DatabaseError('Error getting filters'));
     }
   };
 }
