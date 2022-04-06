@@ -4,23 +4,23 @@ import { WhereOptions } from 'sequelize';
 import db from '../model';
 
 export class FilterController {
-  getAllMuscleGroups = async (
-    request: Request,
-    response: Response,
-    next: NextFunction
-  ): Promise<any> => {
+  getAllFilters = async (req: Request, res: Response): Promise<any> => {
     try {
-      const whereOptions: WhereOptions<MuscleGroupAttributes> = {
-        // filters
-      };
+      const difficultyLevels = await db.DifficultyLevel.findAll();
+      const exerciseTypes = await db.ExerciseTy.findAll();
+      const equipment = await db.Equipment.findAll();
+      const muscleGroups = await db.MuscleGroup.findAll();
 
-      const muscleGroups = await db.MuscleGroup.findAll({
-        where: whereOptions,
-      });
+      const filters: any[] = [
+        ...difficultyLevels,
+        exerciseTypes,
+        equipment,
+        muscleGroups,
+      ];
 
-      return response.send(muscleGroups);
+      return res.send(filters);
     } catch (e) {
-      return next(e);
+      return res.status(400).send(new DatabaseError('Error getting exercise'));
     }
   };
 }

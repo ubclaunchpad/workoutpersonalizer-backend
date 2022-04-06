@@ -163,9 +163,13 @@ export class UserController {
         throw error;
       }
 
-      const newWorkout: WorkoutAttributes = { ...value };
+      // const newWorkout: WorkoutAttributes = { ...value };
+      const newWorkout: WorkoutAttributes & { exercises: number[] } = {
+        ...value,
+      };
 
       const updatedWorkout = await workout.update(newWorkout);
+      await updatedWorkout.setExercises(newWorkout.exercises);
 
       return res.status(200).send(updatedWorkout);
     } catch (e) {
