@@ -2,12 +2,13 @@
 <br />
 <p align="center">
   <a href="https://github.com/ubclaunchpad/workoutpersonalizer-backend">
-    <img src="https://github.com/ubclaunchpad/workoutpersonalizer-backend/blob/cf11aa9af541d417c4a34714a69d3af76d5881ad/src/main/assets/FitHubLogo.png" alt="Logo" height="100" resize>
+    <img src="https://github.com/ubclaunchpad/workoutpersonalizer-backend/blob/cf11aa9af541d417c4a34714a69d3af76d5881ad/src/main/assets/FitHubLogo.png" alt="Logo" height="600" resize>
   </a>
-
-  <h3 align="center">FitHub Server</h3>
-  <a href="https://github.com/ubclaunchpad/workoutpersonalizer-frontend"> <i> View the FitHub Client </i> </a>
-
+  
+  <h3 align="center">FitHub Server</h3> 
+</p>
+<p align="center">
+<a href="https://github.com/ubclaunchpad/workoutpersonalizer-frontend"> <i> View the FitHub Client </i> </a>
 </p>
 
 
@@ -35,31 +36,31 @@ FitHub allows users to create, organize and follow playlists of exercises- allow
 
 <!-- TECHNOLOGIES -->
 ## Technologies
-* Flutter - Frontend
-* Node - Backend
-* AWS S3 - Media Storage 
+* Flutter/Dart - Client
+* Node/ExpressJS - Server
+* Amazon S3 - Media Storage 
 * PostgreSQL - Database
-* Firebase - Authentication
-* Firebase Hosting - FE Deployment
-* Amazon EC2 - BE Deployment
-* Amazon RDS - DB Deployment
+* Firebase Authentication - Authentication
+* Firebase Hosting - Client Deployment
+* Amazon EC2 - Server Deployment
+* Amazon RDS - Database Deployment
 
 <!-- GETTING STARTED -->
 ## Getting Started
 ### Prerequisites
 
-1. Yarn (https://classic.yarnpkg.com/en/docs/install/)
-2. Postgres (https://www.postgresql.org/download/)
+1. [Yarn](https://classic.yarnpkg.com/en/docs/install/)
+2. [Postgres](https://www.postgresql.org/download/)
    - When installing, use the default password "postgres"
    - For macOS users, suggested installation is through homebrew
-3. Postico (https://eggerapps.at/postico/)
-   - This is specific to macOS users
+3. [Postico](https://eggerapps.at/postico/)
+   - This is specific to macOS users. 
 
 ### Installation
 
 1. Run `yarn install` to install all dependencies
 
-### Configurations
+### Configuration
 
 Make a copy of `sample.env`, rename it to `.env`, and fill out the environment variables.
 
@@ -71,7 +72,7 @@ All database commands must start with `yarn sequelize-cli` due to changes in pat
 1. Start the postgres server.
 2. Run `yarn sequelize-cli init` to setup the project.
 3. Run `yarn sequelize-cli db:create`
-   - This command only setups the dev database. There will also databases for testing and production.
+   - This command only setups the dev database. There will also be databases for testing and production.
 4. Run `yarn sequelize-cli db:migrate` to run the pending migrations. Any changes to the tables must take place through migrations.
    Ensure changes are also updated in the model files.
 5. Setup Postico using the same values in the `.env`
