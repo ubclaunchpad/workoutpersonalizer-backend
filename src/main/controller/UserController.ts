@@ -227,6 +227,8 @@ export class UserController {
   updateWorkout = async (req: Request, res: Response): Promise<any> => {
     try {
       // TODO: validate that the user with userId is logged in
+      // TODO: add tests for endpoint
+
       req.body.userId = req.params.userId;
       const { value, error } = WorkoutValidation.schema.validate(req.body, {
         abortEarly: false,
@@ -247,13 +249,24 @@ export class UserController {
         throw error;
       }
 
-      // const newWorkout: WorkoutAttributes = { ...value };
-      const newWorkout: WorkoutAttributes & { exercises: number[] } = {
+      const newWorkout: WorkoutAttributes & {
+        exercises: { [key: number]: number };
+      } = {
         ...value,
       };
 
-      const updatedWorkout = await workout.update(newWorkout);
-      await updatedWorkout.setExercises(newWorkout.exercises);
+      const updatedWorkout = await workout.update({
+        ...newWorkout,
+        exercises: [],
+      });
+
+      Object.entries(newWorkout.exercises).forEach(async ([id, orderNum]) => {
+        const ex = await db.Exercise.findByPk(parseInt(id));
+        ex.WorkoutExercise = {
+          orderNum: orderNum,
+        };
+        await updatedWorkout.addExercise(ex);
+      });
 
       return res.status(200).send(updatedWorkout);
     } catch (e) {
