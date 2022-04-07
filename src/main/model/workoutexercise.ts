@@ -11,6 +11,7 @@ module.exports = (sequelize: any, DataTypes: any) => {
     implements WorkoutExerciseAttributes
   {
     orderNum!: number;
+    freezeTableName: true;
   }
 
   WorkoutExercise.init(
@@ -25,6 +26,7 @@ module.exports = (sequelize: any, DataTypes: any) => {
       sequelize,
       modelName: 'WorkoutExercise',
       timestamps: true,
+      freezeTableName: true,
     }
   );
 
