@@ -11,5 +11,9 @@ export class WorkoutValidation {
     creationDate: Joi.date(),
     lastModificationDate: Joi.date(),
     deletionDate: Joi.date(),
+    exercises: Joi.object().pattern(
+      Joi.number().positive(),
+      Joi.number().positive()
+    ),
   });
 }

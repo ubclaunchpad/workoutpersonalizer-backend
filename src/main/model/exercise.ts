@@ -41,6 +41,7 @@ module.exports = (sequelize: any, DataTypes: any) => {
       });
       Exercise.belongsToMany(models.Workout, {
         through: 'WorkoutExercise',
+        foreignKey: 'exerciseId',
         onDelete: 'CASCADE',
       });
       Exercise.belongsToMany(models.User, {
@@ -77,6 +78,12 @@ module.exports = (sequelize: any, DataTypes: any) => {
       length: {
         type: DataTypes.DECIMAL,
         allowNull: false,
+        get(): number {
+          // Workaround sequelize issue is fixed
+          // Issue: decinmal type returned as string to preserve precision
+          const value = this.getDataValue('length');
+          return value === null ? 0 : parseFloat(value.toString());
+        },
       },
     },
     {

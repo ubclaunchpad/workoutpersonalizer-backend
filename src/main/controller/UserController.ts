@@ -32,6 +32,12 @@ export class UserController {
           as: 'savedExercises',
           required: true,
           through: { attributes: [] },
+          include: [
+            db.DifficultyLevel,
+            db.ExerciseType,
+            db.Equipment,
+            db.MuscleGroup,
+          ],
         },
       });
 
@@ -77,18 +83,22 @@ export class UserController {
     res: Response
   ): Promise<any> => {
     try {
-      const workouts = await db.User.findAll({
-        where: { id: req.params.userId },
+      const workouts = await db.Workout.findAll({
+        where: { userId: req.params.userId },
         include: {
-          model: db.Workout,
-          as: 'workouts',
-          required: true,
+          model: db.Exercise,
+          as: 'exercises',
+          through: { attributes: ['orderNum'] },
+          include: [
+            db.DifficultyLevel,
+            db.ExerciseType,
+            db.Equipment,
+            db.MuscleGroup,
+          ],
         },
       });
 
-      return res
-        .status(200)
-        .send(workouts.length > 0 ? workouts[0].workouts : []);
+      return res.status(200).send(workouts);
     } catch (e) {
       return res.status(400).send(new DatabaseError('Error getting workouts'));
     }
@@ -138,6 +148,7 @@ export class UserController {
             include: [
               {
                 model: db.Exercise,
+                as: 'exercises',
                 through: {
                   attributes: ['orderNum'],
                 },
@@ -154,7 +165,6 @@ export class UserController {
                   db.Equipment,
                   db.MuscleGroup,
                 ],
-                required: true,
               },
             ],
           },
@@ -185,8 +195,25 @@ export class UserController {
         throw error;
       }
 
-      const newWorkout: WorkoutAttributes = { ...value };
-      const createdWorkout = await db.Workout.create(newWorkout);
+      const newWorkout: WorkoutAttributes & {
+        exercises: { [key: number]: number };
+      } = {
+        ...value,
+      };
+
+      const createdWorkout = await db.Workout.create({
+        ...newWorkout,
+        exercises: [],
+      });
+
+      Object.entries(newWorkout.exercises).forEach(async ([id, orderNum]) => {
+        const ex = await db.Exercise.findByPk(parseInt(id));
+        ex.WorkoutExercise = {
+          orderNum: orderNum,
+        };
+        await createdWorkout.addExercise(ex);
+      });
+
       return res.status(200).send(createdWorkout);
     } catch (e) {
       if (e instanceof Joi.ValidationError) {
