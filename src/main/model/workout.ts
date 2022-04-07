@@ -32,6 +32,8 @@ module.exports = (sequelize: any, DataTypes: any) => {
 
       Workout.belongsToMany(models.Exercise, {
         through: 'WorkoutExercise',
+        as: 'exercises',
+        foreignKey: 'workoutId',
         onDelete: 'CASCADE',
       });
     }

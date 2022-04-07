@@ -12,7 +12,15 @@ import {
 export class ExerciseController {
   getAllExercises = async (_req: Request, res: Response): Promise<any> => {
     try {
-      const exercises = await db.Exercise.findAll();
+      const exercises = await db.Exercise.findAll({
+        include: [
+          db.DifficultyLevel,
+          db.ExerciseType,
+          db.Equipment,
+          db.MuscleGroup,
+        ],
+      });
+
       return res.status(200).send(exercises);
     } catch (e) {
       return res
