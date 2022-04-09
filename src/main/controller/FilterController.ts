@@ -1,26 +1,26 @@
-import { NextFunction, Request, Response } from 'express';
-import { MuscleGroupAttributes } from '../model/musclegroup';
-import { WhereOptions } from 'sequelize';
+import { Request, Response } from 'express';
 import db from '../model';
+import { DatabaseError } from '../error/Error';
 
 export class FilterController {
-  getAllMuscleGroups = async (
-    request: Request,
-    response: Response,
-    next: NextFunction
-  ): Promise<any> => {
+  getAllFilters = async (req: Request, res: Response): Promise<any> => {
+    // TODO: add tests for endpoint
     try {
-      const whereOptions: WhereOptions<MuscleGroupAttributes> = {
-        // filters
+      const difficultyLevels = await db.DifficultyLevel.findAll();
+      const exerciseTypes = await db.ExerciseType.findAll();
+      const equipment = await db.Equipment.findAll();
+      const muscleGroups = await db.MuscleGroup.findAll();
+
+      const filters = {
+        difficultyLevels: difficultyLevels,
+        exerciseTypes: exerciseTypes,
+        equipment: equipment,
+        muscleGroups: muscleGroups,
       };
 
-      const muscleGroups = await db.MuscleGroup.findAll({
-        where: whereOptions,
-      });
-
-      return response.send(muscleGroups);
+      return res.status(200).send(filters);
     } catch (e) {
-      return next(e);
+      return res.status(400).send(new DatabaseError('Error getting filters'));
     }
   };
 }
