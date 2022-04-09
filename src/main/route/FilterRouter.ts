@@ -10,13 +10,7 @@ export class FilterRouter {
   }
 
   getRoutes(): Router {
-    this.filterRouter.get(
-      '/muscleGroups',
-      this.filterController.getAllMuscleGroups
-    );
-
-    // TODO: add other filter endpoints
-
+    this.filterRouter.get('/filters', this.filterController.getAllFilters);
     return this.filterRouter;
   }
 }
